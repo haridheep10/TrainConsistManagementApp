@@ -1,31 +1,33 @@
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class TrainConsist {
     public static void main(String[] args) {
-        // Create a HashSet to store unique bogie IDs
-        Set<String> bogieIds = new HashSet<>();
+        // Create a LinkedHashSet to represent the train formation
+        // This ensures uniqueness and preserves insertion order
+        Set<String> trainFormation = new LinkedHashSet<>();
 
-        // Adding bogie IDs to the system
-        System.out.println("Adding bogies to the train...");
-        bogieIds.add("BG101");
-        bogieIds.add("BG102");
-        bogieIds.add("BG103");
+        // 1. Attach bogies to the engine
+        trainFormation.add("Engine");
+        trainFormation.add("Sleeper");
+        trainFormation.add("Cargo");
+        trainFormation.add("Guard");
 
-        // Intentionally adding a duplicate value to test uniqueness
-        System.out.println("Attempting to add duplicate ID: BG101");
-        boolean isAdded = bogieIds.add("BG101");
+        System.out.println("Initial Formation: " + trainFormation);
+
+        // 2. Attempt to attach a duplicate bogie (e.g., Sleeper again) [cite: 1]
+        // LinkedHashSet will automatically ignore this duplicate [cite: 1]
+        boolean isAdded = trainFormation.add("Sleeper");
 
         if (!isAdded) {
-            System.out.println("Duplicate ID BG101 was ignored by the system.");
+            System.out.println("\nDuplicate bogie 'Sleeper' detected! Attachment ignored.");
         }
 
-        // Display the final set of unique IDs
-        System.out.println("\nFinal Train Consist (Unique Bogie IDs):");
-        for (String id : bogieIds) {
-            System.out.println("Bogie ID: " + id);
+        // 3. Display the final formation order [cite: 1]
+        // The order remains: Engine -> Sleeper -> Cargo -> Guard [cite: 1]
+        System.out.println("\nFinal Train Formation (Order Preserved):");
+        for (String bogie : trainFormation) {
+            System.out.println("- " + bogie);
         }
-
-        System.out.println("\nTotal unique bogies: " + bogieIds.size());
     }
 }
